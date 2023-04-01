@@ -1,9 +1,28 @@
-# Calidad y seguridad del código fuente mediante Sonar Cloud
+# Tareas previas
 
-[![Tests](https://github.com/ULL-ESIT-INF-DSI-2223/github-actions-sonar-cloud/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/ULL-ESIT-INF-DSI-2223/github-actions-sonar-cloud/actions/workflows/node.js.yml)
+- Peparar el entorno virtual para que contenga:
 
-[![Coverage Status](https://coveralls.io/repos/github/ULL-ESIT-INF-DSI-2223/github-actions-sonar-cloud/badge.svg?branch=main)](https://coveralls.io/github/ULL-ESIT-INF-DSI-2223/github-actions-sonar-cloud?branch=main)
+  1. [TyeDoc](https://typedoc.org)
+  2. [Mocha](https://mochajs.org)
+  3. [Chai](https://www.chaijs.com)
+  4. Prettier
+  5. eslint
+  6. [Instanbull](https://istanbul.js.org/)
+  7. [Coveralls](https://coveralls.io/)
+  8. [Prompt-sync](https://www.npmjs.com/package/prompt-sync)
+     - `npm i prompt-sync`
+     - `npm i --save-dev @types/prompt-sync`
+  9. [Yargs](https://www.npmjs.com/package/yargs)
+  10. [Chalks](https://www.npmjs.com/package/chalk)
+  11. GitHub Actions
+    - Pages
+    - Coveralls
+    - SonarCloud
+  11. Entender un poco el [API sincrona de Node.js](https://nodejs.org/docs/latest-v19.x/api/fs.html)
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ULL-ESIT-INF-DSI-2223_github-actions-sonar-cloud&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ULL-ESIT-INF-DSI-2223_github-actions-sonar-cloud)
 
-En este repositorio se aloja un ejemplo sencillo que ilustra el uso de la herramienta Sonar Cloud para comprobar la calidad y seguridad del código fuente a través del uso de [GitHub Actions](https://docs.github.com/en/actions). En concreto, se usa la [GitHub Action de Sonar Cloud](https://github.com/marketplace/actions/sonarcloud-scan).
+- Repasar las ["Markdown Basics"](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#links)
+- Tener a mano los [apuntes](https://ull-esit-inf-dsi-2223.github.io/typescript-theory/) principales de la asignatura 
+- Y los [apuntes](https://ull-esit-inf-dsi-2223.github.io/nodejs-theory/) de Node.js
+- Tener a mano el [guion de la practica](https://ull-esit-inf-dsi-2223.github.io/prct05-objects-classes-interfaces/)
+

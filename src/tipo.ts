@@ -1,4 +1,6 @@
-
+/**
+ * Tipos de funkos
+ */
 export enum Tipo {
   POP = "Pop!",
   POP_RIDES = "Pop! Rides",

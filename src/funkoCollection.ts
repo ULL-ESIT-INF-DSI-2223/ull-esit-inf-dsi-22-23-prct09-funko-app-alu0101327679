@@ -2,10 +2,21 @@ import chalk, { ChalkInstance } from "chalk";
 
 import { Funko } from "./funco.js";
 
-//collection of funcos
+/**
+ * clase para definir la coleccion de funkos que tenemos
+ * @param lista lista de funkos que tenemos
+ */
 export class FuncosCollection {
+  /**
+   * constructor de la clase funko
+   * @param lista lista de funkos que tenemos
+   */
   constructor(private lista: Funko[]) {}
 
+  /**
+   * metodo para añaadir un funko a la lista
+   * @param funko funko que queremos añadir a la lista
+   */
   public addFunko(funko: Funko): void {
     const existe = this.lista.some((f) => f.id === funko.id);
     if (existe) {
@@ -17,7 +28,11 @@ export class FuncosCollection {
       console.log(chalk.green(`Funko añadido correctamente: ${funko.nombre}`));
     }
   }
-
+  /**
+   * metodo para modificar un funko de la lista
+   * @param id id del funko que queremos modificar
+   * @param nuevoFunko el nuevo funko que sustituirá al funko con la id indicada
+   */
   public modificarFunko(id: number, nuevoFunko: Funko): void {
     const indice = this.lista.findIndex((f) => f.id === id);
     if (indice === -1) {
@@ -30,6 +45,10 @@ export class FuncosCollection {
     }
   }
 
+  /**
+   * metodo para eliminar un funko de la lista
+   * @param id id del funko que queremos eliminar
+   */
   public eliminarFunko(id: number): void {
     const index = this.lista.findIndex((f) => f.id === id);
     if (index === -1) {
@@ -44,6 +63,9 @@ export class FuncosCollection {
     );
   }
 
+  /**
+   * metodo para listar los funkos de la lista
+   */
   public listarFunkos(): void {
     const range1 = 50;
     const range2 = 100;
@@ -107,6 +129,10 @@ export class FuncosCollection {
       );
   }
 
+  /**
+   * metodo para mostrar la informacion de un funko
+   * @param id id del funko que queremos mostrar
+   */
   public mostrarFunko(id: number): void {
     const foundFunko = this.lista.find((f) => f.id === id);
     if (foundFunko) {

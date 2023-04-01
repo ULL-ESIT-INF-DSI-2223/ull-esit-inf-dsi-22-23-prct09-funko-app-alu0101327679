@@ -76,36 +76,59 @@ const funcosCollection4 = new FuncosCollection(listaFunkos4);
 
 
 //-----------------------------------//
+/**
+ * funcion para almacenar un funko en un archivo json
+ * @param usuario nombre del usuario
+ * @param funko funko a almacenar
+ */
+function almacenarFunko(usuario: string, funko: Funko) {
+  const fileName = funko.nombre.toLowerCase().replace(/\s+/g, '-') + '.json';
+  const dirName = usuario.toLowerCase().replace(/\s+/g, '-');
+  const filePath = `./funkos/${dirName}/${fileName}`;
 
-// function guardarFunko(usuario: string, listaFunko: FuncosCollection) {
-//   const directorioUsuario = path.join(__dirname, usuario);
-//   if (!fs.existsSync(directorioUsuario)) {
-//     fs.mkdirSync(directorioUsuario);
-//   }
+  fs.mkdirSync(`./funkos/${dirName}`, { recursive: true });
+  fs.writeFileSync(filePath, JSON.stringify(funko));
+}
 
-//   const ficheroUsuario = path.join(directorioUsuario, 'funko.json');
-//   fs.writeFileSync(ficheroUsuario, JSON.stringify(listaFunko));
-// }
+/**
+ * funcion para cargar los funkos de un usuario
+ * @param usuario nombre del usuario
+ */
+function cargarFunkos(usuario:string) {
+  const dirName = usuario.toLowerCase().replace(/\s+/g, '-');
+  const dirPath = `./funkos/${dirName}`;
 
-// function cargarFunko(usuario: string) {
-//   const ficheroUsuario = path.join(__dirname, usuario, 'funko.json');
-//   if (!fs.existsSync(ficheroUsuario)) {
-//     return [];
-//   }
+  if (fs.existsSync(dirPath)) {
+    const fileNames = fs.readdirSync(dirPath);
+    const funkos: Funko[]= [];
 
-//   const datosFunko = fs.readFileSync(ficheroUsuario, 'utf8');
-//   return JSON.parse(datosFunko);
-// }
+    fileNames.forEach((fileName:string) => {
+      const filePath = `${dirPath}/${fileName}`;
+      const fileContent = fs.readFileSync(filePath, 'utf8');
+      const funko = JSON.parse(fileContent);
+      funkos.push(funko);
+    });
 
-// guardarFunko("Paco", funcosCollection)
+    return funkos;
+  } else {
+    return [];
+  }
+}
+
+listaFunkos.forEach((funko) => {
+  almacenarFunko('usuario1', funko);
+});
+
+const funkos = cargarFunkos('usuario1');
+console.log(funkos);
 
 //-----------------------------------//
 
 // console.log(listaFunkos[0].id);
-funcosCollection.mostrarFunko(4)  
-funcosCollection.addFunko(funko1)
-funcosCollection.modificarFunko(2, funko3)
-funcosCollection2.modificarFunko(2, funko2);
-funcosCollection3.eliminarFunko(3);
-funcosCollection4.listarFunkos();
+// funcosCollection.mostrarFunko(4)  
+// funcosCollection.addFunko(funko1)
+// funcosCollection.modificarFunko(2, funko3)
+// funcosCollection2.modificarFunko(2, funko2);
+// funcosCollection3.eliminarFunko(3);
+// funcosCollection4.listarFunkos();
 
