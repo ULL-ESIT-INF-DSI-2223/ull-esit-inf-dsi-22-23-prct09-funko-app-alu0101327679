@@ -1,4 +1,6 @@
-import chalk, { ChalkInstance } from "chalk";
+import fs from 'fs';
+import path from 'path';
+import chalk, { ChalkInstance } from 'chalk';
 
 import { Funko } from "./funco.js";
 
@@ -11,7 +13,9 @@ export class FuncosCollection {
    * constructor de la clase funko
    * @param lista lista de funkos que tenemos
    */
-  constructor(private lista: Funko[]) {}
+  constructor(private lista: Funko[], private usuario: string) {
+    this.almacenarFunkos(lista);
+  }
 
   /**
    * metodo para añaadir un funko a la lista
@@ -164,4 +168,57 @@ export class FuncosCollection {
       console.log(chalk.red(`No existe un Funko con ID ${id} en la lista.`));
     }
   }
+
+  public almacenarFunko(funko: Funko) {
+    const fileName = funko.nombre.toLowerCase().replace(/\s+/g, '-') + '.json';
+    const dirName = this.usuario.toLowerCase().replace(/\s+/g, '-');
+    const filePath = `./funkos/${dirName}/${fileName}`;
+  
+    fs.mkdirSync(`./funkos/${dirName}`, { recursive: true });
+    fs.writeFileSync(filePath, JSON.stringify(funko));
+  }
+
+
+
+
+
+
+  public almacenarFunkos(funkos: Funko[]) {
+    funkos.forEach((funko) => this.almacenarFunko(funko));
+  }
+
+  public cargarFunkos() {
+    const dirName = this.usuario.toLowerCase().replace(/\s+/g, '-');
+    const dirPath = `./funkos/${dirName}`;
+  
+    if (fs.existsSync(dirPath)) {
+      const fileNames = fs.readdirSync(dirPath);
+      const funkos: Funko[]= [];
+  
+      fileNames.forEach((fileName:string) => {
+        const filePath = `${dirPath}/${fileName}`;
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        const funko = JSON.parse(fileContent);
+        funkos.push(funko);
+      });
+  
+      return funkos;
+    } else {
+      return [];
+    }
+  }
+
+  public modificarFunkoUsuario(usuario: string, nombre: string, nuevoFunko: Funko) {
+    const dirName = usuario.toLowerCase().replace(/\s+/g, '-');
+    const filePath = `./funkos/${dirName}/${nombre}.json`;
+  
+    if (fs.existsSync(filePath)) {
+      const nuevoContenido = JSON.stringify(nuevoFunko);
+      fs.writeFileSync(filePath, nuevoContenido, 'utf8');
+      console.log(`El Funko "${nombre}" ha sido modificado exitosamente.`);
+    } else {
+      console.log(`No se encontró el archivo del Funko "${nombre}".`);
+    }
+  }
+  
 }

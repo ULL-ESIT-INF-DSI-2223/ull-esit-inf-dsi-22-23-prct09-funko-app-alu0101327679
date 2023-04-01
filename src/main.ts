@@ -32,7 +32,7 @@ const funko2 = new Funko(
   2,
   true,
   "Edicion FlashPoint",
-  50
+  100
 );
 
 const funko3 = new Funko(
@@ -45,7 +45,7 @@ const funko3 = new Funko(
   3,
   true,
   "Edicion FlashPoint",
-  50
+  150
 );
 
 const funko4 = new Funko(
@@ -58,7 +58,7 @@ const funko4 = new Funko(
   4,
   true,
   "Edicion FlashPoint",
-  50
+  200
 );
 
 //test de usuario de la clase FuncosCollection
@@ -67,10 +67,10 @@ const listaFunkos2 = [funko3, funko4];
 const listaFunkos3 = [funko1, funko2, funko3, funko4];
 const listaFunkos4 = [funko1, funko2, funko3, funko4];
 
-const funcosCollection = new FuncosCollection(listaFunkos);
-const funcosCollection2 = new FuncosCollection(listaFunkos2);
-const funcosCollection3 = new FuncosCollection(listaFunkos3);
-const funcosCollection4 = new FuncosCollection(listaFunkos4);
+// const funcosCollection = new FuncosCollection(listaFunkos, "antonio");
+// const funcosCollection2 = new FuncosCollection(listaFunkos2, "saul");
+// const funcosCollection3 = new FuncosCollection(listaFunkos3, "jorge");
+// const funcosCollection4 = new FuncosCollection(listaFunkos4, "sara");
 
 
 //-----------------------------------//
@@ -80,12 +80,26 @@ const funcosCollection4 = new FuncosCollection(listaFunkos4);
  * @param funko funko a almacenar
  */
 function almacenarFunko(usuario: string, funko: Funko) {
+
   const fileName = funko.nombre.toLowerCase().replace(/\s+/g, '-') + '.json';
   const dirName = usuario.toLowerCase().replace(/\s+/g, '-');
   const filePath = `./funkos/${dirName}/${fileName}`;
 
   fs.mkdirSync(`./funkos/${dirName}`, { recursive: true });
   fs.writeFileSync(filePath, JSON.stringify(funko));
+}
+
+function eliminarFunko(usuario: string, nombreFunko: string) {
+  const fileName = nombreFunko.toLowerCase().replace(/\s+/g, '-') + '.json';
+  const dirName = usuario.toLowerCase().replace(/\s+/g, '-');
+  const filePath = `./funkos/${dirName}/${fileName}`;
+
+  try {
+    fs.unlinkSync(filePath);
+    console.log(`El Funko "${nombreFunko}" fue eliminado correctamente.`);
+  } catch (error) {
+    console.error(`Error al intentar eliminar el Funko "${nombreFunko}":`, error);
+  }
 }
 
 /**
@@ -113,7 +127,12 @@ function cargarFunkos(usuario:string) {
   }
 }
 
-
+/**
+ * metodo para modificar un funko del usuario
+ * @param usuario nombre del usuario
+ * @param nombre nombre del funko
+ * @param nuevoFunko nuevo funko
+ */
 function modificarFunko(usuario: string, nombre: string, nuevoFunko: Funko) {
   const dirName = usuario.toLowerCase().replace(/\s+/g, '-');
   const filePath = `./funkos/${dirName}/${nombre}.json`;
@@ -127,23 +146,59 @@ function modificarFunko(usuario: string, nombre: string, nuevoFunko: Funko) {
   }
 }
 
+function listarFunkos(funkos: Funko[]) {
+  const valorMinimo = 0;
+  const valorBajo = 50;
+  const valorMedio = 100;
+  const valorAlto = 500;
+
+  console.log(chalk.bold('Funkos existentes:'));
+  console.log('');
+
+  for (const funko of funkos) {
+    const valor = funko.valorDeMercado;
+
+    let valorColoreado: string;
+
+    if (valor >= 200) {
+      valorColoreado = chalk.green.bold(valor.toFixed(2));
+    } else if (valor >= 150) {
+      valorColoreado = chalk.yellow.bold(valor.toFixed(2));
+    } else if (valor >= 100) {
+      valorColoreado = chalk.blue.bold(valor.toFixed(2));
+    } else {
+      valorColoreado = chalk.red.bold(valor.toFixed(2));
+    }
+
+    console.log(chalk.bold(funko.nombre) + ' - Valor de mercado: ' + valorColoreado);
+  }
+}
+
+
+
 
 
 listaFunkos.forEach((funko) => {
   almacenarFunko('usuario1', funko);
 });
 
-// listaFunkos2.forEach((funko) => {
-//   almacenarFunko('usuario2', funko);
-// });
+listaFunkos4.forEach((funko) => {
+  almacenarFunko('usuario2', funko);
+});
 
 
-const funkos = cargarFunkos('usuario1');
-// const funkos2 = cargarFunkos('usuario2');
-console.log(funkos);
+let funkos = cargarFunkos('usuario1');
+let funkos4 = cargarFunkos('usuario2');
 
-modificarFunko('usuario1', 'batman', funko3);
-console.log(cargarFunkos('usuario1'));
+listarFunkos(funkos);
+listarFunkos(funkos4);
+// // const funkos2 = cargarFunkos('usuario2');
+
+// eliminarFunko('usuario1', 'Batman');
+
+
+// modificarFunko('usuario1', 'batman', funko3);
+// console.log(cargarFunkos('usuario1'));
 // console.log(funkos2);
 
 //-----------------------------------//
@@ -155,4 +210,12 @@ console.log(cargarFunkos('usuario1'));
 // funcosCollection2.modificarFunko(2, funko2);
 // funcosCollection3.eliminarFunko(3);
 // funcosCollection4.listarFunkos();
+
+//-----------------------------------//
+// console.log(funcosCollection)
+
+// funcosCollection.almacenarFunkos([funko3, funko4]);
+// console.log("//-----------------------------------//")
+
+// console.log(funcosCollection.cargarFunkos())
 
