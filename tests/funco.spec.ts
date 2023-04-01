@@ -12,97 +12,97 @@ describe('Funko', () => {
     funko = new Funko(1, 'Harry Potter', 'Funko de Harry Potter', Tipo.POP, Genero.ANIMACION, 'Harry Potter', 1, true, 'Cicatriz en forma de rayo', 1000);
   });
 
-  it('should create an instance', () => {
+  it('deberia crear una instancia', () => {
     expect(funko).to.exist
   });
 
-  it('should have a valid id', () => {
-    expect(funko.id).to.be.equal(1);
+  it('debería tener una id valida', () => {
+    expect(funko.id_).to.be.equal(1);
   });
 
-  it('should have a valid name', () => {
-    expect(funko.nombre).to.be.equal('Harry Potter');
+  it('debería tener un nombre correcto', () => {
+    expect(funko.nombre_).to.be.equal('Harry Potter');
   });
 
-  it('should have a valid description', () => {
-    expect(funko.descripcion).to.be.equal('Funko de Harry Potter');
+  it('debería tener una descripcion valida', () => {
+    expect(funko.descripcion_).to.be.equal('Funko de Harry Potter');
   });
 
-  it('should have a valid type', () => {
-    expect(funko.tipo).to.deep.equal(Tipo.POP);
+  it('debería tener un tipo correcto', () => {
+    expect(funko.tipo_).to.deep.equal(Tipo.POP);
   });
 
-  it('should have a valid genre', () => {
-    expect(funko.genero).to.be.equal(Genero.ANIMACION);
+  it('debería tener un genero correcto', () => {
+    expect(funko.genero_).to.be.equal(Genero.ANIMACION);
   });
 
-  it('should have a valid franchise', () => {
-    expect(funko.franquicia).to.be.equal('Harry Potter');
+  it('debería tener una franquicia correcta', () => {
+    expect(funko.franquicia_).to.be.equal('Harry Potter');
   });
 
-  it('should have a valid number', () => {
-    expect(funko.numero).to.be.equal(1);
+  it('debería tener nu numero correcto', () => {
+    expect(funko.numero_).to.be.equal(1);
   });
 
-  it('should have a valid exclusivity', () => {
-    expect(funko.exclusivo).to.be.true;
+  it('debería tener una exclusividad correcta', () => {
+    expect(funko.exclusivo_).to.be.true;
   });
 
-  it('should have a valid special features', () => {
-    expect(funko.caracteristicasEspeciales).to.be.equal('Cicatriz en forma de rayo');
+  it('debería tener características especiales correctas', () => {
+    expect(funko.caracteristicasEspeciales_).to.be.equal('Cicatriz en forma de rayo');
   });
 
-  it('should have a valid market value', () => {
-    expect(funko.valorDeMercado).to.be.equal(1000);
+  it('debería tener un valor de mercado valido', () => {
+    expect(funko.valorDeMercado_).to.be.equal(1000);
   });
 
-  it('should update id', () => {
+  it('debería cambiar la id', () => {
     funko.id_ = 2;
-    expect(funko.id).to.be.equal(2);
+    expect(funko.id_).to.be.equal(2);
   });
 
-  it('should update name', () => {
+  it('debería cambiar el nombre', () => {
     funko.nombre_ = 'Ron Weasley';
-    expect(funko.nombre).to.be.equal('Ron Weasley');
+    expect(funko.nombre_).to.be.equal('Ron Weasley');
   });
 
-  it('should update description', () => {
+  it('debería cambiar la descripcion', () => {
     funko.descripcion_ = 'Funko de Ron Weasley';
-    expect(funko.descripcion).to.be.equal('Funko de Ron Weasley');
+    expect(funko.descripcion_).to.be.equal('Funko de Ron Weasley');
   });
 
-  it('should update type', () => {
+  it('debería cambiar el tipo', () => {
     funko.tipo_ = Tipo.POP_RIDES;
-    expect(funko.tipo).to.be.equal(Tipo.POP_RIDES);
+    expect(funko.tipo_).to.be.equal(Tipo.POP_RIDES);
   });
 
-  it('should update genre', () => {
+  it('debería cambiar el genero', () => {
     funko.genero_ = Genero.ANIME;
-    expect(funko.genero).to.be.equal(Genero.ANIME);
+    expect(funko.genero_).to.be.equal(Genero.ANIME);
   });
 
-  it('should update franchise', () => {
+  it('debería cambiar al frannquicia', () => {
     funko.franquicia_ = 'Animales fantásticos';
-    expect(funko.franquicia).to.be.equal('Animales fantásticos');
+    expect(funko.franquicia_).to.be.equal('Animales fantásticos');
   });
 
-  it('should update number', () => {
+  it('debería cambiar el numero', () => {
     funko.numero_ = 2;
-    expect(funko.numero).to.be.equal(2);
+    expect(funko.numero_).to.be.equal(2);
   });
 
-  it('should update exclusivity', () => {
+  it('debería cambiar la exclusividad', () => {
     funko.exclusivo_ = false;
-    expect(funko.exclusivo).to.be.false;
+    expect(funko.exclusivo_).to.be.false;
   });
 
-  it('should update special features', () => {
+  it('debería cambiar las características especiales', () => {
     funko.caracteristicasEspeciales_ = 'Varita mágica';
-    expect(funko.caracteristicasEspeciales).to.be.equal('Varita mágica');
+    expect(funko.caracteristicasEspeciales_).to.be.equal('Varita mágica');
   });
 
-  it('should update market value', () => {
+  it('debería cambiar el valor del mercado', () => {
     funko.valorDeMercado_ = 500;
-    expect(funko.valorDeMercado).to.be.equal(500);
+    expect(funko.valorDeMercado_).to.be.equal(500);
   });
 });

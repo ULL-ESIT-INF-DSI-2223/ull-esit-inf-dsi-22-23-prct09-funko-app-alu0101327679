@@ -177,4 +177,11 @@ export class Funko {
   get valorDeMercado_() {
     return this.valorDeMercado;
   }
+  
+  /**
+   * metodo para modificar el valor de mercado del funko
+   */
+  set valorDeMercado_(valorDeMercado: number) {
+    this.valorDeMercado = valorDeMercado;
+  }
 }
