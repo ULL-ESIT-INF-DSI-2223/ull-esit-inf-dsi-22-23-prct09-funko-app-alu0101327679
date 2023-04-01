@@ -1,6 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import chalk, { ChalkInstance } from 'chalk';
+import fs from "fs";
+import path from "path";
+import chalk, { ChalkInstance } from "chalk";
 
 import { Funko } from "./funco.js";
 
@@ -14,7 +14,7 @@ export class FuncosCollection {
    * @param lista lista de funkos que tenemos
    */
   constructor(private lista: Funko[], private usuario: string) {
-    this.almacenarFunkos(lista);
+    this.almacenarFunkosUsuario(lista);
   }
 
   /**
@@ -170,25 +170,34 @@ export class FuncosCollection {
   }
 
   // Implementando el manejo de ficheros
-  public almacenarFunko(funko: Funko) {
-    const fileName = funko.nombre.toLowerCase().replace(/\s+/g, '-') + '.json';
-    const dirName = this.usuario.toLowerCase().replace(/\s+/g, '-');
+
+  public almacenarFunkoUsuario(funko: Funko) {
+    const fileName = funko.id + ".json";
+    const dirName = this.usuario.toLowerCase().replace(/\s+/g, "-");
     const filePath = `./funkos/${dirName}/${fileName}`;
-  
+
     fs.mkdirSync(`./funkos/${dirName}`, { recursive: true });
     fs.writeFileSync(filePath, JSON.stringify(funko));
   }
 
-
-
-
-
-
-  public almacenarFunkos(funkos: Funko[]) {
-    funkos.forEach((funko) => this.almacenarFunko(funko));
+  public almacenarFunkosUsuario(funkos: Funko[]) {
+    funkos.forEach((funko) => this.almacenarFunkoUsuario(funko));
   }
 
-  public cargarFunkos() {
+  public eliminarFunkoUsuario( id: number) {
+    const fileName = id.toString()+ '.json';
+    const dirName = this.usuario.toLowerCase().replace(/\s+/g, '-');
+    const filePath = `./funkos/${dirName}/${fileName}`;
+  
+    try {
+      fs.unlinkSync(filePath);
+      console.log(chalk.green(`El Funko "${id}" fue eliminado correctamente.`));
+    } catch (error) {
+      console.error(chalk.red(`Error al intentar eliminar el Funko "${id}"`));
+    }
+  }
+
+  public cargarFunkosUsuario() {
     const dirName = this.usuario.toLowerCase().replace(/\s+/g, '-');
     const dirPath = `./funkos/${dirName}`;
   
@@ -209,17 +218,80 @@ export class FuncosCollection {
     }
   }
 
-  public modificarFunkoUsuario(usuario: string, nombre: string, nuevoFunko: Funko) {
-    const dirName = usuario.toLowerCase().replace(/\s+/g, '-');
-    const filePath = `./funkos/${dirName}/${nombre}.json`;
+  public modificarFunkoUsuario(id: number, nuevoFunko: Funko) {
+    const dirName = this.usuario.toLowerCase().replace(/\s+/g, '-');
+    const filePath = `./funkos/${dirName}/${id.toString()}.json`;
   
     if (fs.existsSync(filePath)) {
       const nuevoContenido = JSON.stringify(nuevoFunko);
       fs.writeFileSync(filePath, nuevoContenido, 'utf8');
-      console.log(`El Funko "${nombre}" ha sido modificado exitosamente.`);
+      console.log(`El Funko "${id.toString()}" ha sido modificado exitosamente.`);
     } else {
-      console.log(`No se encontró el archivo del Funko "${nombre}".`);
+      console.log(`No se encontró el archivo del Funko "${id.toString()}".`);
     }
   }
   
+  
+public listarFunkosUsuario() {
+  const valorMinimo = 0;
+  const valorBajo = 50;
+  const valorMedio = 100;
+  const valorAlto = 500;
+
+  console.log(chalk.bold('Funkos existentes:'));
+  // console.log('');
+  let funkos = this.cargarFunkosUsuario()
+  for (const funko of funkos) {
+    const valor = funko.valorDeMercado;
+
+    let valorColoreado: string;
+
+    if (valor >= 200) {
+      valorColoreado = chalk.green.bold(valor.toFixed(2));
+    } else if (valor >= 150) {
+      valorColoreado = chalk.yellow.bold(valor.toFixed(2));
+    } else if (valor >= 100) {
+      valorColoreado = chalk.blue.bold(valor.toFixed(2));
+    } else {
+      valorColoreado = chalk.red.bold(valor.toFixed(2));
+    }
+
+    console.log(chalk.bold.magenta(funko.nombre) + ' - Valor de mercado: ' + valorColoreado);
+  }
+}
+
+public mostrarFunkoUsuario(id: number): void {
+  const fileName = `${id}.json`;
+  const dirName = this.usuario.toLowerCase().replace(/\s+/g, '-');
+  const filePath = `./funkos/${dirName}/${fileName}`;
+
+  try {
+    const data = fs.readFileSync(filePath, 'utf8');
+    const foundFunko = JSON.parse(data);
+    console.log(chalk.magenta.bold(`Información del Funko con ID ${id}:`));
+    console.log(`Nombre: ${foundFunko.nombre}`);
+    console.log(`Descripción: ${foundFunko.descripcion}`);
+    console.log(`Tipo: ${foundFunko.tipo}`);
+    console.log(`Género: ${foundFunko.genero}`);
+    console.log(`Franquicia: ${foundFunko.franquicia}`);
+    console.log(`Número: ${foundFunko.numero}`);
+    console.log(`Exclusivo: ${foundFunko.exclusivo ? "Sí" : "No"}`);
+    console.log(`Características especiales: ${foundFunko.caracteristicasEspeciales}`);
+
+    const valor = foundFunko.valorDeMercado;
+    let color: ChalkInstance;
+    if (valor > 200) {
+      color = chalk.green;
+    } else if (valor >= 150) {
+      color = chalk.yellow;
+    } else if (valor >= 100) {
+      color = chalk.blue;
+    } else {
+      color = chalk.red;
+    }
+    console.log(`Valor de mercado: ${color.bold(`$${valor.toFixed(2)}`)}`);
+  } catch (err) {
+    console.log(chalk.red(`No existe un Funko con ID ${id} en la lista.`));
+  }
+}
 }

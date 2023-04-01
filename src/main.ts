@@ -9,7 +9,7 @@ import { Genero } from "./genero.js";
 import { FuncosCollection } from "./funkoCollection.js";
 
 //test de usuario de la clase Funko
-const funko1 = new Funko(
+export const funko1 = new Funko(
   1,
   "Batman",
   "Funko de Batman",
@@ -22,7 +22,7 @@ const funko1 = new Funko(
   50
 );
 
-const funko2 = new Funko(
+export const funko2 = new Funko(
   2,
   "Superman",
   "Funko de Superman",
@@ -35,7 +35,7 @@ const funko2 = new Funko(
   100
 );
 
-const funko3 = new Funko(
+export const funko3 = new Funko(
   3,
   "Joker",
   "Funko de Joker",
@@ -48,7 +48,7 @@ const funko3 = new Funko(
   150
 );
 
-const funko4 = new Funko(
+export const funko4 = new Funko(
   4,
   "Flash",
   "Funko de Flash",
@@ -62,15 +62,15 @@ const funko4 = new Funko(
 );
 
 //test de usuario de la clase FuncosCollection
-const listaFunkos = [funko1, funko2];
-const listaFunkos2 = [funko3, funko4];
-const listaFunkos3 = [funko1, funko2, funko3, funko4];
-const listaFunkos4 = [funko1, funko2, funko3, funko4];
+export const listaFunkos = [funko1, funko2];
+export const listaFunkos2 = [funko3, funko4];
+export const listaFunkos3 = [funko1, funko2, funko3, funko4];
+export const listaFunkos4 = [funko1, funko2, funko3, funko4];
 
-// const funcosCollection = new FuncosCollection(listaFunkos, "antonio");
-// const funcosCollection2 = new FuncosCollection(listaFunkos2, "saul");
-// const funcosCollection3 = new FuncosCollection(listaFunkos3, "jorge");
-// const funcosCollection4 = new FuncosCollection(listaFunkos4, "sara");
+export const funcosCollection = new FuncosCollection(listaFunkos, "antonio");
+export const funcosCollection2 = new FuncosCollection(listaFunkos2, "saul");
+export const funcosCollection3 = new FuncosCollection(listaFunkos3, "jorge");
+export const funcosCollection4 = new FuncosCollection(listaFunkos4, "sara");
 
 
 //-----------------------------------//
@@ -210,29 +210,31 @@ function mostrarFunko(usuario: string, id: number): void {
 }
 
 
-listaFunkos.forEach((funko) => {
-  almacenarFunko('usuario1', funko);
-});
+// listaFunkos.forEach((funko) => {
+//   almacenarFunko('usuario1', funko);
+// });
 
-listaFunkos4.forEach((funko) => {
-  almacenarFunko('usuario2', funko);
-});
+// listaFunkos4.forEach((funko) => {
+//   almacenarFunko('usuario2', funko);
+// });
 
 
-let funkos = cargarFunkos('usuario1');
-let funkos4 = cargarFunkos('usuario2');
+// let funkos = cargarFunkos('usuario1');
+// let funkos4 = cargarFunkos('usuario2');
 
 // listarFunkos(funkos);
 // listarFunkos(funkos4);
 // console.log(funkos4);
 
-mostrarFunko('usuario2', 1);
+// mostrarFunko('usuario2', 1);
 // // const funkos2 = cargarFunkos('usuario2');
 
 // eliminarFunko('usuario1', 'Batman');
 
 
-// modificarFunko('usuario1', 'batman', funko3);
+// console.log(cargarFunkos('usuario1'));
+// console.log("///////////////////////////////////////////////")
+// modificarFunko('usuario1', funko1.id.toString(), funko2);
 // console.log(cargarFunkos('usuario1'));
 // console.log(funkos2);
 
@@ -249,6 +251,20 @@ mostrarFunko('usuario2', 1);
 //-----------------------------------//
 // console.log(funcosCollection)
 
+// funcosCollection.almacenarFunkosUsuario([funko4, funko3]);//
+
+//
+let funkos1 = funcosCollection.cargarFunkosUsuario();
+funcosCollection.almacenarFunkoUsuario(funko4)
+// funcosCollection.listarFunkosUsuario()
+// funcosCollection.eliminarFunkoUsuario(1)
+// funkos1 = funcosCollection.cargarFunkosUsuario();
+// funcosCollection.listarFunkosUsuario()
+// funcosCollection.modificarFunkoUsuario(2, funko3)
+// funkos1 = funcosCollection.cargarFunkosUsuario();
+// funcosCollection.listarFunkosUsuario()
+
+//
 // funcosCollection.almacenarFunkos([funko3, funko4]);
 // console.log("//-----------------------------------//")
 
