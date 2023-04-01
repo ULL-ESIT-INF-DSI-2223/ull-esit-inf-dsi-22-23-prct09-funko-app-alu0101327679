@@ -259,16 +259,3 @@ function mostrarFunko(usuario: string, id: number): void {
 //
 let funkos1 = funcosCollection.cargarFunkosUsuario();
 funcosCollection.almacenarFunkoUsuario(funko4);
-// funcosCollection.listarFunkosUsuario()
-// funcosCollection.eliminarFunkoUsuario(1)
-// funkos1 = funcosCollection.cargarFunkosUsuario();
-// funcosCollection.listarFunkosUsuario()
-// funcosCollection.modificarFunkoUsuario(2, funko3)
-// funkos1 = funcosCollection.cargarFunkosUsuario();
-// funcosCollection.listarFunkosUsuario()
-
-//
-// funcosCollection.almacenarFunkos([funko3, funko4]);
-// console.log("//-----------------------------------//")
-
-// console.log(funcosCollection.cargarFunkos())
