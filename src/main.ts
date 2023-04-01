@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import chalk from 'chalk';
+import chalk, { ChalkInstance } from 'chalk';
 
 
 import { Funko  } from "./funco.js"
@@ -80,8 +80,7 @@ const listaFunkos4 = [funko1, funko2, funko3, funko4];
  * @param funko funko a almacenar
  */
 function almacenarFunko(usuario: string, funko: Funko) {
-
-  const fileName = funko.nombre.toLowerCase().replace(/\s+/g, '-') + '.json';
+  const fileName = funko.id + '.json';
   const dirName = usuario.toLowerCase().replace(/\s+/g, '-');
   const filePath = `./funkos/${dirName}/${fileName}`;
 
@@ -153,7 +152,7 @@ function listarFunkos(funkos: Funko[]) {
   const valorAlto = 500;
 
   console.log(chalk.bold('Funkos existentes:'));
-  console.log('');
+  // console.log('');
 
   for (const funko of funkos) {
     const valor = funko.valorDeMercado;
@@ -170,12 +169,45 @@ function listarFunkos(funkos: Funko[]) {
       valorColoreado = chalk.red.bold(valor.toFixed(2));
     }
 
-    console.log(chalk.bold(funko.nombre) + ' - Valor de mercado: ' + valorColoreado);
+    console.log(chalk.bold.magenta(funko.nombre) + ' - Valor de mercado: ' + valorColoreado);
   }
 }
 
 
+function mostrarFunko(usuario: string, id: number): void {
+  const fileName = `${id}.json`;
+  const dirName = usuario.toLowerCase().replace(/\s+/g, '-');
+  const filePath = `./funkos/${dirName}/${fileName}`;
 
+  try {
+    const data = fs.readFileSync(filePath, 'utf8');
+    const foundFunko = JSON.parse(data);
+    console.log(chalk.magenta.bold(`Información del Funko con ID ${id}:`));
+    console.log(`Nombre: ${foundFunko.nombre}`);
+    console.log(`Descripción: ${foundFunko.descripcion}`);
+    console.log(`Tipo: ${foundFunko.tipo}`);
+    console.log(`Género: ${foundFunko.genero}`);
+    console.log(`Franquicia: ${foundFunko.franquicia}`);
+    console.log(`Número: ${foundFunko.numero}`);
+    console.log(`Exclusivo: ${foundFunko.exclusivo ? "Sí" : "No"}`);
+    console.log(`Características especiales: ${foundFunko.caracteristicasEspeciales}`);
+
+    const valor = foundFunko.valorDeMercado;
+    let color: ChalkInstance;
+    if (valor > 200) {
+      color = chalk.green;
+    } else if (valor >= 150) {
+      color = chalk.yellow;
+    } else if (valor >= 100) {
+      color = chalk.blue;
+    } else {
+      color = chalk.red;
+    }
+    console.log(`Valor de mercado: ${color.bold(`$${valor.toFixed(2)}`)}`);
+  } catch (err) {
+    console.log(chalk.red(`No existe un Funko con ID ${id} en la lista.`));
+  }
+}
 
 
 listaFunkos.forEach((funko) => {
@@ -190,8 +222,11 @@ listaFunkos4.forEach((funko) => {
 let funkos = cargarFunkos('usuario1');
 let funkos4 = cargarFunkos('usuario2');
 
-listarFunkos(funkos);
-listarFunkos(funkos4);
+// listarFunkos(funkos);
+// listarFunkos(funkos4);
+// console.log(funkos4);
+
+mostrarFunko('usuario2', 1);
 // // const funkos2 = cargarFunkos('usuario2');
 
 // eliminarFunko('usuario1', 'Batman');

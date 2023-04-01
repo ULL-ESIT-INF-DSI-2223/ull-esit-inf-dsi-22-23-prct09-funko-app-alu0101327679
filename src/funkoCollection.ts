@@ -169,6 +169,7 @@ export class FuncosCollection {
     }
   }
 
+  // Implementando el manejo de ficheros
   public almacenarFunko(funko: Funko) {
     const fileName = funko.nombre.toLowerCase().replace(/\s+/g, '-') + '.json';
     const dirName = this.usuario.toLowerCase().replace(/\s+/g, '-');
