@@ -1,5 +1,7 @@
 import fs from 'fs';
 import path from 'path';
+import chalk from 'chalk';
+
 
 import { Funko  } from "./funco.js"
 import { Tipo } from "./tipo.js";
@@ -111,19 +113,38 @@ function cargarFunkos(usuario:string) {
   }
 }
 
+
+function modificarFunko(usuario: string, nombre: string, nuevoFunko: Funko) {
+  const dirName = usuario.toLowerCase().replace(/\s+/g, '-');
+  const filePath = `./funkos/${dirName}/${nombre}.json`;
+
+  if (fs.existsSync(filePath)) {
+    const nuevoContenido = JSON.stringify(nuevoFunko);
+    fs.writeFileSync(filePath, nuevoContenido, 'utf8');
+    console.log(`El Funko "${nombre}" ha sido modificado exitosamente.`);
+  } else {
+    console.log(`No se encontró el archivo del Funko "${nombre}".`);
+  }
+}
+
+
+
 listaFunkos.forEach((funko) => {
   almacenarFunko('usuario1', funko);
 });
 
-listaFunkos2.forEach((funko) => {
-  almacenarFunko('usuario2', funko);
-});
+// listaFunkos2.forEach((funko) => {
+//   almacenarFunko('usuario2', funko);
+// });
 
 
 const funkos = cargarFunkos('usuario1');
-const funkos2 = cargarFunkos('usuario2');
+// const funkos2 = cargarFunkos('usuario2');
 console.log(funkos);
-console.log(funkos2);
+
+modificarFunko('usuario1', 'batman', funko3);
+console.log(cargarFunkos('usuario1'));
+// console.log(funkos2);
 
 //-----------------------------------//
 
