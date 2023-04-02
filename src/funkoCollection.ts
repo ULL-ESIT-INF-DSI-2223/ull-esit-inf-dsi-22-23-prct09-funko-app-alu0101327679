@@ -13,8 +13,8 @@ export class FuncosCollection {
    * constructor de la clase funko
    * @param lista lista de funkos que tenemos
    */
-  constructor(private lista: Funko[], private usuario: string) {
-    this.almacenarFunkosUsuario(lista, usuario);
+  constructor() {
+    // this.almacenarFunkosUsuario(lista, usuario);
   }
 
   // /**
@@ -179,10 +179,18 @@ export class FuncosCollection {
     const fileName = funko.id + ".json";
     const dirName = usuario.toLowerCase().replace(/\s+/g, "-");
     const filePath = `./funkos/${dirName}/${fileName}`;
-
+  
+    // Comprobamos si el fichero ya existe en el directorio
+    if (fs.existsSync(filePath)) {
+      console.log(chalk.bold.red(`Ya existe un Funko con el nombre ${funko.nombre} en el directorio ${dirName}`));
+      return;
+    }
+  
     fs.mkdirSync(`./funkos/${dirName}`, { recursive: true });
     fs.writeFileSync(filePath, JSON.stringify(funko));
+    console.log(chalk.green(`El Funko "${funko.nombre}" fue almacenado correctamente.`));
   }
+  
   /**
    * metodo para almacenar un array de funkos en el fichero
    * @param funkos array de funkos a almacenar

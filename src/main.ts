@@ -66,10 +66,10 @@ export const listaFunkos2 = [funko3, funko4];
 export const listaFunkos3 = [funko1, funko2, funko3, funko4];
 export const listaFunkos4 = [funko1, funko2, funko3, funko4];
 
-export const funcosCollection = new FuncosCollection(listaFunkos, "antonio");
-export const funcosCollection2 = new FuncosCollection(listaFunkos2, "saul");
-export const funcosCollection3 = new FuncosCollection(listaFunkos3, "jorge");
-export const funcosCollection4 = new FuncosCollection(listaFunkos4, "sara");
+// export const funcosCollection = new FuncosCollection(listaFunkos, "antonio");
+// export const funcosCollection2 = new FuncosCollection(listaFunkos2, "saul");
+// export const funcosCollection3 = new FuncosCollection(listaFunkos3, "jorge");
+// export const funcosCollection4 = new FuncosCollection(listaFunkos4, "sara");
 
 //-----------------------------------//
 /**
@@ -257,5 +257,5 @@ export const funcosCollection4 = new FuncosCollection(listaFunkos4, "sara");
 // funcosCollection.almacenarFunkosUsuario([funko4, funko3]);//
 
 //
-let funkos1 = funcosCollection.cargarFunkosUsuario("usuario1");
-funcosCollection.almacenarFunkoUsuario(funko4, "usuario1");
+// let funkos1 = funcosCollection.cargarFunkosUsuario("usuario1");
+// funcosCollection.almacenarFunkoUsuario(funko4, "usuario1");
