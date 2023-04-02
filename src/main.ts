@@ -57,14 +57,14 @@ export const funko4 = new Funko(
   4,
   true,
   "Edicion FlashPoint",
-  200
+  201
 );
 
-//test de usuario de la clase FuncosCollection
-export const listaFunkos = [funko1, funko2];
-export const listaFunkos2 = [funko3, funko4];
-export const listaFunkos3 = [funko1, funko2, funko3, funko4];
-export const listaFunkos4 = [funko1, funko2, funko3, funko4];
+// //test de usuario de la clase FuncosCollection
+// export const listaFunkos = [funko1, funko2];
+// export const listaFunkos2 = [funko3, funko4];
+// export const listaFunkos3 = [funko1, funko2, funko3, funko4];
+// export const listaFunkos4 = [funko1, funko2, funko3, funko4];
 
 // export const funcosCollection = new FuncosCollection(listaFunkos, "antonio");
 // export const funcosCollection2 = new FuncosCollection(listaFunkos2, "saul");

@@ -1,17 +1,18 @@
-// const yargs = require('yargs');
-// // const { mostrarFunko, almacenarFunkoUsuario } = require('./tus-funciones');
 import { Funko } from "./funco.js";
 import { FuncosCollection } from "./funkoCollection.js";
-// import { funcosCollection } from "./main.js";
 import { Tipo } from "./tipo.js";
 import { Genero } from "./genero.js";
-
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-// import { mostrarFunkoUsuario, almacenarFunkoUsuario } from './tus-funciones';
-// import { }
 
+/**
+ * Se utiliza el paquete yargs para definir comandos y opciones y que permite
+ * interactuar con una coleccion de Funkos de un usuario
+ */
 yargs(hideBin(process.argv))
+  /**
+   * Comando para almacenar un Funko en la coleccion de un usuario
+   */
   .command(
     "mostrar",
     "Mostrar información de un Funko concreto",
@@ -32,6 +33,9 @@ yargs(hideBin(process.argv))
       new FuncosCollection().mostrarFunkoUsuario(argv.id, argv.usuario);
     }
   )
+  /**
+   * Comando para listar los Funkos de un usuario
+   */
   .command(
     "listar",
     "Mostrar información de un Funko concreto",
@@ -47,6 +51,9 @@ yargs(hideBin(process.argv))
       new FuncosCollection().listarFunkosUsuario(argv.usuario);
     }
   )
+  /**
+   * Comando para modificar un Funko de un usuario
+   */
   .command(
     "modificar",
     "Mostrar información de un Funko concreto",
@@ -111,9 +118,27 @@ yargs(hideBin(process.argv))
     },
     (argv) => {
       // let collectionPrueba = new FuncosCollection([], argv.);
-      new FuncosCollection().modificarFunkoUsuario(argv.id, new Funko( argv.id, argv.nombre, argv.descripcion, argv.tipo, argv.genero, argv.franquicia, argv.numero, argv.exclusivo, argv.caracteristicasEspeciales, argv.valorDeMercado), argv.usuario );
+      new FuncosCollection().modificarFunkoUsuario(
+        argv.id,
+        new Funko(
+          argv.id,
+          argv.nombre,
+          argv.descripcion,
+          argv.tipo,
+          argv.genero,
+          argv.franquicia,
+          argv.numero,
+          argv.exclusivo,
+          argv.caracteristicasEspeciales,
+          argv.valorDeMercado
+        ),
+        argv.usuario
+      );
     }
   )
+  /**
+   * Comando para eliminar un Funko de un usuario
+   */
   .command(
     "eliminar",
     "Mostrar información de un Funko concreto",
@@ -133,7 +158,9 @@ yargs(hideBin(process.argv))
       new FuncosCollection().eliminarFunkoUsuario(argv.id, argv.usuario);
     }
   )
-
+  /**
+   * Comando para añadir un Funko a la coleccion de un usuario
+   */
   .command(
     "add",
     "Añadir un nuevo Funko a la lista",

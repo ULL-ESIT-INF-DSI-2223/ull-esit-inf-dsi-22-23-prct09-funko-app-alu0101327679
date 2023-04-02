@@ -5,171 +5,14 @@ import chalk, { ChalkInstance } from "chalk";
 import { Funko } from "./funco.js";
 
 /**
- * clase para definir la coleccion de funkos que tenemos
- * @param lista lista de funkos que tenemos
+ * clase para definir la coleccion de funkos que tenemos en el sistema
  */
 export class FuncosCollection {
   /**
    * constructor de la clase funko
-   * @param lista lista de funkos que tenemos
    */
   constructor() {
-    // this.almacenarFunkosUsuario(lista, usuario);
   }
-
-  // /**
-  //  * metodo para añaadir un funko a la lista
-  //  * @param funko funko que queremos añadir a la lista
-  //  */
-  // public addFunko(funko: Funko): void {
-  //   const existe = this.lista.some((f) => f.id === funko.id);
-  //   if (existe) {
-  //     console.error(
-  //       chalk.red(`Error: ya existe un Funko con el ID ${funko.id}`)
-  //     );
-  //   } else {
-  //     this.lista.push(funko);
-  //     console.log(chalk.green(`Funko añadido correctamente: ${funko.nombre}`));
-  //   }
-  // }
-  // /**
-  //  * metodo para modificar un funko de la lista
-  //  * @param id id del funko que queremos modificar
-  //  * @param nuevoFunko el nuevo funko que sustituirá al funko con la id indicada
-  //  */
-  // public modificarFunko(id: number, nuevoFunko: Funko): void {
-  //   const indice = this.lista.findIndex((f) => f.id === id);
-  //   if (indice === -1) {
-  //     console.error(chalk.red(`Error: no existe un Funko con el ID ${id}`));
-  //   } else {
-  //     this.lista[indice] = nuevoFunko;
-  //     console.log(
-  //       chalk.green(`Funko modificado correctamente: ${nuevoFunko.nombre}`)
-  //     );
-  //   }
-  // }
-
-  // /**
-  //  * metodo para eliminar un funko de la lista
-  //  * @param id id del funko que queremos eliminar
-  //  */
-  // public eliminarFunko(id: number): void {
-  //   const index = this.lista.findIndex((f) => f.id === id);
-  //   if (index === -1) {
-  //     console.log(
-  //       chalk.red(`Error: no existe un Funko con el ID ${id} en la lista.`)
-  //     );
-  //     return;
-  //   }
-  //   this.lista.splice(index, 1);
-  //   console.log(
-  //     chalk.green(`El Funko con el ID ${id} ha sido eliminado de la lista.`)
-  //   );
-  // }
-
-  // /**
-  //  * metodo para listar los funkos de la lista
-  //  */
-  // public listarFunkos(): void {
-  //   const range1 = 50;
-  //   const range2 = 100;
-  //   const range3 = 150;
-  //   const range4 = 200;
-
-  //   console.log(
-  //     chalk.bold.green("Funkos con valor de mercado superior a", range4)
-  //   );
-  //   this.lista
-  //     .filter((elemento) => elemento.valorDeMercado > range4)
-  //     .forEach((elemento) =>
-  //       console.log(
-  //         `ID: ${elemento.id}, Nombre: ${
-  //           elemento.nombre
-  //         }, Valor de mercado: ${chalk.bold.green(elemento.valorDeMercado)}`
-  //       )
-  //     );
-  //   console.log(
-  //     chalk.bold.yellow(
-  //       "Funkos con valor de mercado entre",
-  //       range3,
-  //       "y",
-  //       range4
-  //     )
-  //   );
-  //   this.lista
-  //     .filter((f) => f.valorDeMercado >= range3 && f.valorDeMercado <= range4)
-  //     .forEach((f) =>
-  //       console.log(
-  //         `ID: ${f.id}, Nombre: ${
-  //           f.nombre
-  //         }, Valor de mercado: ${chalk.bold.yellow(f.valorDeMercado)}`
-  //       )
-  //     );
-
-  //   console.log(
-  //     chalk.bold.blue("Funkos con valor de mercado entre", range2, "y", range3)
-  //   );
-  //   this.lista
-  //     .filter((f) => f.valorDeMercado >= range2 && f.valorDeMercado < range3)
-  //     .forEach((f) =>
-  //       console.log(
-  //         `ID: ${f.id}, Nombre: ${
-  //           f.nombre
-  //         }, Valor de mercado: ${chalk.bold.blue(f.valorDeMercado)}`
-  //       )
-  //     );
-
-  //   console.log(
-  //     chalk.bold.red("Funkos con valor de mercado inferior a", range2)
-  //   );
-  //   this.lista
-  //     .filter((f) => f.valorDeMercado <= range1)
-  //     .forEach((f) =>
-  //       console.log(
-  //         `ID: ${f.id}, Nombre:  ${
-  //           f.nombre
-  //         }, Valor de mercado:  ${chalk.bold.red(f.valorDeMercado)}`
-  //       )
-  //     );
-  // }
-
-  // /**
-  //  * metodo para mostrar la informacion de un funko
-  //  * @param id id del funko que queremos mostrar
-  //  */
-  // public mostrarFunko(id: number): void {
-  //   const foundFunko = this.lista.find((f) => f.id === id);
-  //   if (foundFunko) {
-  //     console.log(chalk.magenta.bold(`Información del Funko con ID ${id}:`));
-  //     console.log(`Nombre: ${foundFunko.nombre}`);
-  //     console.log(`Descripción: ${foundFunko.descripcion}`);
-  //     console.log(`Tipo: ${foundFunko.tipo}`);
-  //     console.log(`Género: ${foundFunko.genero}`);
-  //     console.log(`Franquicia: ${foundFunko.franquicia}`);
-  //     console.log(`Número: ${foundFunko.numero}`);
-  //     console.log(`Exclusivo: ${foundFunko.exclusivo ? "Sí" : "No"}`);
-  //     console.log(
-  //       `Características especiales: ${foundFunko.caracteristicasEspeciales}`
-  //     );
-
-  //     const valor = foundFunko.valorDeMercado;
-  //     let color: ChalkInstance;
-  //     if (valor > 200) {
-  //       color = chalk.green;
-  //     } else if (valor >= 150) {
-  //       color = chalk.yellow;
-  //     } else if (valor >= 100) {
-  //       color = chalk.blue;
-  //     } else {
-  //       color = chalk.red;
-  //     }
-  //     console.log(`Valor de mercado: ${color.bold(`$${valor.toFixed(2)}`)}`);
-  //   } else {
-  //     console.log(chalk.red(`No existe un Funko con ID ${id} en la lista.`));
-  //   }
-  // }
-
-  // Implementando el manejo de ficheros
 
   /**
    * metodo para almacenar un funko en el fichero
@@ -188,15 +31,7 @@ export class FuncosCollection {
   
     fs.mkdirSync(`./funkos/${dirName}`, { recursive: true });
     fs.writeFileSync(filePath, JSON.stringify(funko));
-    console.log(chalk.green(`El Funko "${funko.nombre}" fue almacenado correctamente.`));
-  }
-  
-  /**
-   * metodo para almacenar un array de funkos en el fichero
-   * @param funkos array de funkos a almacenar
-   */
-  public almacenarFunkosUsuario(funkos: Funko[], usuario: string) {
-    funkos.forEach((funko) => this.almacenarFunkoUsuario(funko, usuario));
+    console.log(chalk.green.bold(`El Funko "${funko.nombre}" fue almacenado correctamente.`));
   }
 
     /**
@@ -210,9 +45,11 @@ export class FuncosCollection {
 
     try {
       fs.unlinkSync(filePath);
-      console.log(chalk.green(`El Funko "${id}" fue eliminado correctamente.`));
+      console.log(chalk.green.bold(`El Funko "${id}" fue eliminado correctamente.`));
+      return true
     } catch (error) {
-      console.error(chalk.red(`Error al intentar eliminar el Funko "${id}"`));
+      console.error(chalk.red.bold(`Error al intentar eliminar el Funko "${id}"`));
+      return false
     }
   }
   /**
@@ -253,10 +90,10 @@ export class FuncosCollection {
       const nuevoContenido = JSON.stringify(nuevoFunko);
       fs.writeFileSync(filePath, nuevoContenido, "utf8");
       console.log(
-        `El Funko "${id.toString()}" ha sido modificado exitosamente.`
+        chalk.bold.green(`El Funko "${id.toString()}" ha sido modificado exitosamente.`)
       );
     } else {
-      console.log(`No se encontró el archivo del Funko "${id.toString()}".`);
+      console.log(chalk.bold.red(`No se encontró el archivo del Funko "${id.toString()}".`));
     }
   }
 
@@ -268,15 +105,21 @@ export class FuncosCollection {
     const valorBajo = 50;
     const valorMedio = 100;
     const valorAlto = 500;
-
+  
     console.log(chalk.bold("Funkos existentes:"));
     // console.log('');
     let funkos = this.cargarFunkosUsuario(usuario);
+  
+    if (funkos.length === 0) {
+      console.log(chalk.bold.red("No se encontraron funkos para el usuario: " + usuario));
+      return false
+    }
+  
     for (const funko of funkos) {
       const valor = funko.valorDeMercado;
-
+  
       let valorColoreado: string;
-
+  
       if (valor >= 200) {
         valorColoreado = chalk.green.bold(valor.toFixed(2));
       } else if (valor >= 150) {
@@ -286,20 +129,21 @@ export class FuncosCollection {
       } else {
         valorColoreado = chalk.red.bold(valor.toFixed(2));
       }
-
+  
       console.log(
         chalk.bold.magenta(funko.nombre) +
           " - Valor de mercado: " +
           valorColoreado
       );
     }
+    return true
   }
 
   /**
    * metodo para mostrar un funko del usuario
    * @param id id del funko a mostrar
    */
-  public mostrarFunkoUsuario(id: number, usuario: string): void {
+  public mostrarFunkoUsuario(id: number, usuario: string): boolean{
     const fileName = `${id}.json`;
     const dirName = usuario.toLowerCase().replace(/\s+/g, "-");
     const filePath = `./funkos/${dirName}/${fileName}`;
@@ -331,8 +175,10 @@ export class FuncosCollection {
         color = chalk.red;
       }
       console.log(`Valor de mercado: ${color.bold(`$${valor.toFixed(2)}`)}`);
+      return true
     } catch (err) {
       console.log(chalk.red(`No existe un Funko con ID ${id} en la lista.`));
+      return false
     }
   }
 }
