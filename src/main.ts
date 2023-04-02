@@ -77,143 +77,143 @@ export const funcosCollection4 = new FuncosCollection(listaFunkos4, "sara");
  * @param usuario nombre del usuario
  * @param funko funko a almacenar
  */
-function almacenarFunko(usuario: string, funko: Funko) {
-  const fileName = funko.id + ".json";
-  const dirName = usuario.toLowerCase().replace(/\s+/g, "-");
-  const filePath = `./funkos/${dirName}/${fileName}`;
+// function almacenarFunko(usuario: string, funko: Funko) {
+//   const fileName = funko.id + ".json";
+//   const dirName = usuario.toLowerCase().replace(/\s+/g, "-");
+//   const filePath = `./funkos/${dirName}/${fileName}`;
 
-  fs.mkdirSync(`./funkos/${dirName}`, { recursive: true });
-  fs.writeFileSync(filePath, JSON.stringify(funko));
-}
+//   fs.mkdirSync(`./funkos/${dirName}`, { recursive: true });
+//   fs.writeFileSync(filePath, JSON.stringify(funko));
+// }
 
-function eliminarFunko(usuario: string, nombreFunko: string) {
-  const fileName = nombreFunko.toLowerCase().replace(/\s+/g, "-") + ".json";
-  const dirName = usuario.toLowerCase().replace(/\s+/g, "-");
-  const filePath = `./funkos/${dirName}/${fileName}`;
+// function eliminarFunko(usuario: string, nombreFunko: string) {
+//   const fileName = nombreFunko.toLowerCase().replace(/\s+/g, "-") + ".json";
+//   const dirName = usuario.toLowerCase().replace(/\s+/g, "-");
+//   const filePath = `./funkos/${dirName}/${fileName}`;
 
-  try {
-    fs.unlinkSync(filePath);
-    console.log(`El Funko "${nombreFunko}" fue eliminado correctamente.`);
-  } catch (error) {
-    console.error(
-      `Error al intentar eliminar el Funko "${nombreFunko}":`,
-      error
-    );
-  }
-}
+//   try {
+//     fs.unlinkSync(filePath);
+//     console.log(`El Funko "${nombreFunko}" fue eliminado correctamente.`);
+//   } catch (error) {
+//     console.error(
+//       `Error al intentar eliminar el Funko "${nombreFunko}":`,
+//       error
+//     );
+//   }
+// }
 
 /**
  * funcion para cargar los funkos de un usuario
  * @param usuario nombre del usuario
- */
-function cargarFunkos(usuario: string) {
-  const dirName = usuario.toLowerCase().replace(/\s+/g, "-");
-  const dirPath = `./funkos/${dirName}`;
+//  */
+// function cargarFunkos(usuario: string) {
+//   const dirName = usuario.toLowerCase().replace(/\s+/g, "-");
+//   const dirPath = `./funkos/${dirName}`;
 
-  if (fs.existsSync(dirPath)) {
-    const fileNames = fs.readdirSync(dirPath);
-    const funkos: Funko[] = [];
+//   if (fs.existsSync(dirPath)) {
+//     const fileNames = fs.readdirSync(dirPath);
+//     const funkos: Funko[] = [];
 
-    fileNames.forEach((fileName: string) => {
-      const filePath = `${dirPath}/${fileName}`;
-      const fileContent = fs.readFileSync(filePath, "utf8");
-      const funko = JSON.parse(fileContent);
-      funkos.push(funko);
-    });
+//     fileNames.forEach((fileName: string) => {
+//       const filePath = `${dirPath}/${fileName}`;
+//       const fileContent = fs.readFileSync(filePath, "utf8");
+//       const funko = JSON.parse(fileContent);
+//       funkos.push(funko);
+//     });
 
-    return funkos;
-  } else {
-    return [];
-  }
-}
+//     return funkos;
+//   } else {
+//     return [];
+//   }
+// }
 
-/**
- * metodo para modificar un funko del usuario
- * @param usuario nombre del usuario
- * @param nombre nombre del funko
- * @param nuevoFunko nuevo funko
- */
-function modificarFunko(usuario: string, nombre: string, nuevoFunko: Funko) {
-  const dirName = usuario.toLowerCase().replace(/\s+/g, "-");
-  const filePath = `./funkos/${dirName}/${nombre}.json`;
+// /**
+//  * metodo para modificar un funko del usuario
+//  * @param usuario nombre del usuario
+//  * @param nombre nombre del funko
+//  * @param nuevoFunko nuevo funko
+//  */
+// function modificarFunko(usuario: string, nombre: string, nuevoFunko: Funko) {
+//   const dirName = usuario.toLowerCase().replace(/\s+/g, "-");
+//   const filePath = `./funkos/${dirName}/${nombre}.json`;
 
-  if (fs.existsSync(filePath)) {
-    const nuevoContenido = JSON.stringify(nuevoFunko);
-    fs.writeFileSync(filePath, nuevoContenido, "utf8");
-    console.log(`El Funko "${nombre}" ha sido modificado exitosamente.`);
-  } else {
-    console.log(`No se encontró el archivo del Funko "${nombre}".`);
-  }
-}
+//   if (fs.existsSync(filePath)) {
+//     const nuevoContenido = JSON.stringify(nuevoFunko);
+//     fs.writeFileSync(filePath, nuevoContenido, "utf8");
+//     console.log(`El Funko "${nombre}" ha sido modificado exitosamente.`);
+//   } else {
+//     console.log(`No se encontró el archivo del Funko "${nombre}".`);
+//   }
+// }
 
-function listarFunkos(funkos: Funko[]) {
-  const valorMinimo = 0;
-  const valorBajo = 50;
-  const valorMedio = 100;
-  const valorAlto = 500;
+// function listarFunkos(funkos: Funko[]) {
+//   const valorMinimo = 0;
+//   const valorBajo = 50;
+//   const valorMedio = 100;
+//   const valorAlto = 500;
 
-  console.log(chalk.bold("Funkos existentes:"));
-  // console.log('');
+//   console.log(chalk.bold("Funkos existentes:"));
+//   // console.log('');
 
-  for (const funko of funkos) {
-    const valor = funko.valorDeMercado;
+//   for (const funko of funkos) {
+//     const valor = funko.valorDeMercado;
 
-    let valorColoreado: string;
+//     let valorColoreado: string;
 
-    if (valor >= 200) {
-      valorColoreado = chalk.green.bold(valor.toFixed(2));
-    } else if (valor >= 150) {
-      valorColoreado = chalk.yellow.bold(valor.toFixed(2));
-    } else if (valor >= 100) {
-      valorColoreado = chalk.blue.bold(valor.toFixed(2));
-    } else {
-      valorColoreado = chalk.red.bold(valor.toFixed(2));
-    }
+//     if (valor >= 200) {
+//       valorColoreado = chalk.green.bold(valor.toFixed(2));
+//     } else if (valor >= 150) {
+//       valorColoreado = chalk.yellow.bold(valor.toFixed(2));
+//     } else if (valor >= 100) {
+//       valorColoreado = chalk.blue.bold(valor.toFixed(2));
+//     } else {
+//       valorColoreado = chalk.red.bold(valor.toFixed(2));
+//     }
 
-    console.log(
-      chalk.bold.magenta(funko.nombre) +
-        " - Valor de mercado: " +
-        valorColoreado
-    );
-  }
-}
+//     console.log(
+//       chalk.bold.magenta(funko.nombre) +
+//         " - Valor de mercado: " +
+//         valorColoreado
+//     );
+//   }
+// }
 
-function mostrarFunko(usuario: string, id: number): void {
-  const fileName = `${id}.json`;
-  const dirName = usuario.toLowerCase().replace(/\s+/g, "-");
-  const filePath = `./funkos/${dirName}/${fileName}`;
+// function mostrarFunko(usuario: string, id: number): void {
+//   const fileName = `${id}.json`;
+//   const dirName = usuario.toLowerCase().replace(/\s+/g, "-");
+//   const filePath = `./funkos/${dirName}/${fileName}`;
 
-  try {
-    const data = fs.readFileSync(filePath, "utf8");
-    const foundFunko = JSON.parse(data);
-    console.log(chalk.magenta.bold(`Información del Funko con ID ${id}:`));
-    console.log(`Nombre: ${foundFunko.nombre}`);
-    console.log(`Descripción: ${foundFunko.descripcion}`);
-    console.log(`Tipo: ${foundFunko.tipo}`);
-    console.log(`Género: ${foundFunko.genero}`);
-    console.log(`Franquicia: ${foundFunko.franquicia}`);
-    console.log(`Número: ${foundFunko.numero}`);
-    console.log(`Exclusivo: ${foundFunko.exclusivo ? "Sí" : "No"}`);
-    console.log(
-      `Características especiales: ${foundFunko.caracteristicasEspeciales}`
-    );
+//   try {
+//     const data = fs.readFileSync(filePath, "utf8");
+//     const foundFunko = JSON.parse(data);
+//     console.log(chalk.magenta.bold(`Información del Funko con ID ${id}:`));
+//     console.log(`Nombre: ${foundFunko.nombre}`);
+//     console.log(`Descripción: ${foundFunko.descripcion}`);
+//     console.log(`Tipo: ${foundFunko.tipo}`);
+//     console.log(`Género: ${foundFunko.genero}`);
+//     console.log(`Franquicia: ${foundFunko.franquicia}`);
+//     console.log(`Número: ${foundFunko.numero}`);
+//     console.log(`Exclusivo: ${foundFunko.exclusivo ? "Sí" : "No"}`);
+//     console.log(
+//       `Características especiales: ${foundFunko.caracteristicasEspeciales}`
+//     );
 
-    const valor = foundFunko.valorDeMercado;
-    let color: ChalkInstance;
-    if (valor > 200) {
-      color = chalk.green;
-    } else if (valor >= 150) {
-      color = chalk.yellow;
-    } else if (valor >= 100) {
-      color = chalk.blue;
-    } else {
-      color = chalk.red;
-    }
-    console.log(`Valor de mercado: ${color.bold(`$${valor.toFixed(2)}`)}`);
-  } catch (err) {
-    console.log(chalk.red(`No existe un Funko con ID ${id} en la lista.`));
-  }
-}
+//     const valor = foundFunko.valorDeMercado;
+//     let color: ChalkInstance;
+//     if (valor > 200) {
+//       color = chalk.green;
+//     } else if (valor >= 150) {
+//       color = chalk.yellow;
+//     } else if (valor >= 100) {
+//       color = chalk.blue;
+//     } else {
+//       color = chalk.red;
+//     }
+//     console.log(`Valor de mercado: ${color.bold(`$${valor.toFixed(2)}`)}`);
+//   } catch (err) {
+//     console.log(chalk.red(`No existe un Funko con ID ${id} en la lista.`));
+//   }
+// }
 
 // listaFunkos.forEach((funko) => {
 //   almacenarFunko('usuario1', funko);
@@ -257,5 +257,5 @@ function mostrarFunko(usuario: string, id: number): void {
 // funcosCollection.almacenarFunkosUsuario([funko4, funko3]);//
 
 //
-let funkos1 = funcosCollection.cargarFunkosUsuario();
-funcosCollection.almacenarFunkoUsuario(funko4);
+let funkos1 = funcosCollection.cargarFunkosUsuario("usuario1");
+funcosCollection.almacenarFunkoUsuario(funko4, "usuario1");

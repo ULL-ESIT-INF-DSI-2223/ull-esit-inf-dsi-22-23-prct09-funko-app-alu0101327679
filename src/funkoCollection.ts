@@ -14,7 +14,7 @@ export class FuncosCollection {
    * @param lista lista de funkos que tenemos
    */
   constructor(private lista: Funko[], private usuario: string) {
-    this.almacenarFunkosUsuario(lista);
+    this.almacenarFunkosUsuario(lista, usuario);
   }
 
   // /**
@@ -175,9 +175,9 @@ export class FuncosCollection {
    * metodo para almacenar un funko en el fichero
    * @param funko funko a almacenar
    */
-  public almacenarFunkoUsuario(funko: Funko) {
+  public almacenarFunkoUsuario(funko: Funko, usuario: string) {
     const fileName = funko.id + ".json";
-    const dirName = this.usuario.toLowerCase().replace(/\s+/g, "-");
+    const dirName = usuario.toLowerCase().replace(/\s+/g, "-");
     const filePath = `./funkos/${dirName}/${fileName}`;
 
     fs.mkdirSync(`./funkos/${dirName}`, { recursive: true });
@@ -187,17 +187,17 @@ export class FuncosCollection {
    * metodo para almacenar un array de funkos en el fichero
    * @param funkos array de funkos a almacenar
    */
-  public almacenarFunkosUsuario(funkos: Funko[]) {
-    funkos.forEach((funko) => this.almacenarFunkoUsuario(funko));
+  public almacenarFunkosUsuario(funkos: Funko[], usuario: string) {
+    funkos.forEach((funko) => this.almacenarFunkoUsuario(funko, usuario));
   }
 
     /**
      * metodo para eliminar un funko del fichero
      * @param id id del funko a eliminar
      */
-  public eliminarFunkoUsuario(id: number) {
+  public eliminarFunkoUsuario(id: number, usuario: string) {
     const fileName = id.toString() + ".json";
-    const dirName = this.usuario.toLowerCase().replace(/\s+/g, "-");
+    const dirName = usuario.toLowerCase().replace(/\s+/g, "-");
     const filePath = `./funkos/${dirName}/${fileName}`;
 
     try {
@@ -211,8 +211,8 @@ export class FuncosCollection {
    * metodo para cargar los funkos del usuario
    * @returns array de funkos del usuario
    */
-  public cargarFunkosUsuario() {
-    const dirName = this.usuario.toLowerCase().replace(/\s+/g, "-");
+  public cargarFunkosUsuario(usuario: string) {
+    const dirName = usuario.toLowerCase().replace(/\s+/g, "-");
     const dirPath = `./funkos/${dirName}`;
 
     if (fs.existsSync(dirPath)) {
@@ -237,8 +237,8 @@ export class FuncosCollection {
    * @param id id del funko a modificar
    * @param nuevoFunko nuevo funko a almacenar
    */
-  public modificarFunkoUsuario(id: number, nuevoFunko: Funko) {
-    const dirName = this.usuario.toLowerCase().replace(/\s+/g, "-");
+  public modificarFunkoUsuario(id: number, nuevoFunko: Funko, usuario: string) {
+    const dirName = usuario.toLowerCase().replace(/\s+/g, "-");
     const filePath = `./funkos/${dirName}/${id.toString()}.json`;
 
     if (fs.existsSync(filePath)) {
@@ -255,7 +255,7 @@ export class FuncosCollection {
   /**
    * metodo para listar los funkos del usuario
    */
-  public listarFunkosUsuario() {
+  public listarFunkosUsuario(usuario: string) {
     const valorMinimo = 0;
     const valorBajo = 50;
     const valorMedio = 100;
@@ -263,7 +263,7 @@ export class FuncosCollection {
 
     console.log(chalk.bold("Funkos existentes:"));
     // console.log('');
-    let funkos = this.cargarFunkosUsuario();
+    let funkos = this.cargarFunkosUsuario(usuario);
     for (const funko of funkos) {
       const valor = funko.valorDeMercado;
 
@@ -291,9 +291,9 @@ export class FuncosCollection {
    * metodo para mostrar un funko del usuario
    * @param id id del funko a mostrar
    */
-  public mostrarFunkoUsuario(id: number): void {
+  public mostrarFunkoUsuario(id: number, usuario: string): void {
     const fileName = `${id}.json`;
-    const dirName = this.usuario.toLowerCase().replace(/\s+/g, "-");
+    const dirName = usuario.toLowerCase().replace(/\s+/g, "-");
     const filePath = `./funkos/${dirName}/${fileName}`;
 
     try {

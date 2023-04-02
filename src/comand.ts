@@ -11,10 +11,21 @@ import { hideBin } from "yargs/helpers";
 // import { mostrarFunko, almacenarFunkoUsuario } from './tus-funciones';
 
 yargs(hideBin(process.argv))
+  .option("usuario", {
+    alias: "u",
+    description: "Nombre del usuario",
+    type: "string",
+    demandOption: true,
+  })
   .command(
     "mostrar",
     "Mostrar información de un Funko concreto",
     {
+      usuario: {
+        description: "Propietario del Funko",
+        type: "string",
+        demandOption: true,
+      },
       id: {
         description: "ID del Funko",
         type: "number",
@@ -22,13 +33,19 @@ yargs(hideBin(process.argv))
       },
     },
     (argv) => {
-      funcosCollection.mostrarFunkoUsuario(argv.id);
+      // let collectionPrueba = new FuncosCollection([], argv.);
+      funcosCollection.mostrarFunkoUsuario(argv.id, argv.usuario);
     }
   )
   .command(
     "add",
     "Añadir un nuevo Funko a la lista",
     {
+      usuario: {
+        description: "Propietario del Funko",
+        type: "string",
+        demandOption: true,
+      },
       id: {
         description: "ID del Funko",
         type: "number",
@@ -95,7 +112,7 @@ yargs(hideBin(process.argv))
         argv.caracteristicasEspeciales,
         argv.valorDeMercado
       );
-      funcosCollection.almacenarFunkoUsuario(nuevoFunko);
+      funcosCollection.almacenarFunkoUsuario(nuevoFunko, argv.usuario);
     }
   )
   .help().argv;
