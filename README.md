@@ -54,7 +54,7 @@ Las funciones que debemos implementar son:
     console.log(chalk.green.bold(`El Funko "${funko.nombre}" fue almacenado correctamente.`));
   }
 ```
-Este código es una función escrita en TypeScript o JavaScript que almacena información sobre un Funko en un archivo JSON dentro de un directorio específico en el sistema de archivos.
+Este código es una función escrita en TypeScript  que almacena información sobre un Funko en un archivo JSON dentro de un directorio específico en el sistema de archivos.
 
 La función toma dos argumentos: el objeto Funko que contiene la información sobre el Funko que se va a almacenar y el nombre del usuario que posee el Funko.
 
