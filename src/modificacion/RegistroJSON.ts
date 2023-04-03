@@ -8,10 +8,17 @@ import {readFile} from 'fs';
  */
 export class RegistroJSON extends Registro {
 
+  /**
+   * constructor de la clase RegistroJSON
+   * @param Bolsa  bolsa de la que se va a leer el fichero
+   */
   constructor(Bolsa: Bolsa){
     super(Bolsa)
   }
 
+  /**
+   * metodo que procesa el fichero JSON
+   */
   protected pocesar(): void {
     readFile('formato_JSON.json', (err, data) => {
       if (err) {

@@ -8,10 +8,17 @@ import {readFile} from 'fs';
  */
 export class RegistroCSV extends Registro {
 
+  /**
+   * constructor de la clase RegistroCSV
+   * @param Bolsa   bolsa de la que se va a leer el fichero
+   */
   constructor(Bolsa: Bolsa){
     super(Bolsa)
   }
 
+  /**
+   * funcion que procesa el fichero CSV
+   */
   protected pocesar(): void {
     readFile('formato_csv.csv', (err, data) => {
       if (err) {
