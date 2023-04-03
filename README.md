@@ -33,7 +33,7 @@ El programa principal que desarrollaremos se basa en el desarrollo de un sistema
 
 En este caso se obtendría un arbol de directorios con esta forma luego de haber generado funkos para varios usuarios:
 
-![arbol de directorios](images/Screenshot_15.png)
+![arbol de directorios](./images/Screenshot_15.png)
 
 Las funciones que debemos implementar son:
 
